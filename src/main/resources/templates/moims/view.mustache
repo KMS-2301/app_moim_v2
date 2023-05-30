@@ -1,0 +1,15 @@
+{{> /common/header }}
+<div class="py-2 border-bottom d-flex justify-content-between">
+	<h5 class="fs-5">#다양한 모임을 한눈에 확인하세요.</h5>
+</div>
+<div class="text-end pt-1">
+	<a href="/moims/create" class="btn btn-success btn-sm "><i
+		class="bi bi-plus-circle me-1"></i><span>모임 개설</span></a>
+</div>
+<div class="flex-wrap row px-1">
+	{{#moim }}
+	  {{title }} / {{description }}
+	{{/moim}}
+</div>
+
+{{ > /common/footer }}
