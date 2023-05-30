@@ -9,3 +9,4 @@ public interface UserRepository extends JpaRepository<User, String> {
 
 	List<User> findByIdContainingOrNickContainingAllIgnoreCase(String id, String nick);
 }
+  

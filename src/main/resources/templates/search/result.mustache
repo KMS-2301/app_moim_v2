@@ -16,11 +16,20 @@
 	<h6 class="border-bottom pb-2">#사용자들</h6>
 	{{#result }}
 	<div class="d-flex text-body-seconadry pt-3">
-		<img src="/image/avatar/man1.png" style="width: 48px" class="me-2" />
+		{{#avatarUrl }}
+		<img src="{{.}}" style="width: 48px" class="me-2" />
+		{{/avatarUrl }}
+		{{^avatarUrl }}
+		<img src="" style="width: 48px" class="me-2" />
+		{{/avatarUrl }}
 		<div>
-			<b class="text-gary-dark fs-6">@{{id}}</b> <small>{{nick}}</small> - since {{joinDay }} ({{joinTime}})
+			<b class="text-gary-dark fs-6">@{{id}}</b> 
+			<small>{{nick}}</small> - since {{joinDay }} ({{joinTime}})
+			{{#description }}<p>{{.}}</p>{{/description}}
 		</div>
 	</div>
 	{{/result }}
 </div>
 {{ > /common/footer }}
+
+

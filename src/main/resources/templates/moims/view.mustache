@@ -1,15 +1,73 @@
 {{> /common/header }}
-<div class="py-2 border-bottom d-flex justify-content-between">
-	<h5 class="fs-5">#다양한 모임을 한눈에 확인하세요.</h5>
+<div class="py-2 border-bottom d-flex justify-content-between mb-2">
+	<h5 class="fs-5">#새로운 경험과 친구들이 기다리고 있습니다.</h5>
 </div>
-<div class="text-end pt-1">
-	<a href="/moims/create" class="btn btn-success btn-sm "><i
-		class="bi bi-plus-circle me-1"></i><span>모임 개설</span></a>
+
+{{#moim }}
+<div class="p-2 mb-2 bg-dark text-white rounded-3">
+	<div class="container-fluid py-2">
+		<div class="d-flex align-items-center mb-2">
+			{{#manager.userDetail.avatar.url }} <img src="{{.}}"
+				style="width: 48px" class="me-2" />
+			{{/manager.userDetail.avatar.url }}
+			<div class="fs-5 text-warning">@{{manager.id
+				}}({{manager.nick}}) 님의 모임</div>
+		</div>
+
+		<h1 class="fw-bold">
+			{{title}} <small class="fs-6 text-secondary">{{cate}}</small>
+		</h1>
+		<p class="fs-4">{{description }}</p>
+		<p class="text-end text-black-80 fs-smaller">모임 예정일 : {{targetDate
+			}} ({{duration}}h)</p>
+	</div>
 </div>
-<div class="flex-wrap row px-1">
-	{{#moim }}
-	  {{title }} / {{description }}
-	{{/moim}}
+{{/moim }}
+<div class="mb-3 border-bottom pb-2">
+	<form action="/moims/reply" method="post">
+		<input type="hidden" name="moimId" value="{{moim.id}}" />
+		<div class="mb-2">
+			<textarea class="form-control form-control-sm" placeholder="문의 글을 남겨주세요." name="text"
+				rows="3"></textarea>
+		</div>
+		<div class="row g-2 align-items-center justify-content-end">
+			<div class="col-auto">
+				<input type="password" class="form-control form-control-sm" name="password"
+					placeholder="비밀번호를 설정해주세요">
+			</div>
+			<div class="col-auto">
+				<button class="btn btn-dark text-white btn-sm">문의 등록</button>
+			</div>
+		</div>
+	</form>
 </div>
+
+<table class="table table-sm">
+	<thead class="table-dark">
+		<tr>
+			<th scope="col" class="col-11">#</th>
+			<th scope="col" class="col-1"></th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#replys }}
+		<tr>
+			<td class="align-middle">{{text}}</td>
+			<td>
+				<button class="btn btn-danger btn-sm">
+					<i class="bi bi-trash3"></i>
+				</button>
+			</td>
+		</tr>
+		{{/replys }}
+	</tbody>
+</table>
+<ul class="pagination pagination-sm justify-content-end">
+	<li class="page-item" ><span
+		class="page-link">1</span></li>
+	<li class="page-item"><a class="page-link" href="#">2</a></li>
+	<li class="page-item"><a class="page-link" href="#">3</a></li>
+</ul>
+
 
 {{ > /common/footer }}

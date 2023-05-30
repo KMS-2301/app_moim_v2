@@ -1,7 +1,9 @@
 package org.edupoll.controller;
 
+import org.edupoll.model.dto.AddReplyRequestData;
 import org.edupoll.model.entity.Moim;
 import org.edupoll.service.MoimService;
+import org.edupoll.service.ReplyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class MoimController {
 	
 	@Autowired
 	MoimService moimService;
+	
+	@Autowired
+	ReplyService replyService;
 	
 	@GetMapping("/moims")
 	public String showMoimList(@RequestParam(defaultValue = "1") int p,  Model model) {
@@ -39,9 +44,16 @@ public class MoimController {
 	
 	
 	@GetMapping("/moims/view")
-	public String showMoimDetail(String id, Model model) {
+	public String showMoimDetail(String id, @RequestParam(defaultValue="1") int p,  Model model) {
 		model.addAttribute("moim", moimService.getSpecificMoimById(id));
+		model.addAttribute("replys", replyService.getReplysByMoimId(id, p));
 		return "moims/view";
+	}
+	
+	@PostMapping("/moims/reply")
+	public String replyAddHandle(AddReplyRequestData data) {
+		replyService.createNewReplay(data);
+		return "redirect:/moims/view?id="+data.getMoimId();
 	}
 	
 }

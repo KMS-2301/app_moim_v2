@@ -11,12 +11,18 @@
 	{{/error }}
 	<form class="my-2 p-2" method="post" action="/private/modify">
 		<div class="mb-1 text-center">
-			<img src="/image/avatar/man1.png" style="max-width: 50%"
+			{{#savedDetail.avatar }}
+			<img src="{{url}}" style="max-width: 50%"
 				class="rounded img-thumbnail" alt="...">
+			{{/savedDetail.avatar }}
+			{{^savedDetail.avatar }}
+			<img src="" style="max-width: 50%"
+				class="rounded img-thumbnail" alt="...">
+			{{/savedDetail.avatar }} 
 		</div>
 		<div class="mb-1 text-secondary">
 			<label class="form-label ">아바타</label> <input type="text"
-				class="form-control" name="avatarId"
+				class="form-control" name="avatar.id"
 				value="{{#savedDetail.avatarId}}{{.}}{{/savedDetail.avatarId}}" />
 		</div>
 		<div class="mb-1 text-secondary">

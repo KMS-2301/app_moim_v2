@@ -3,9 +3,12 @@ package org.edupoll.model.entity;
 import java.util.Date;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,21 +20,11 @@ public class UserDetail {
 
 	String address;
 	Date birthday;
-	String avatarId;
 	String description;
 
-	public UserDetail() {
-		super();
-	}
-
-	public UserDetail(Integer idx, String address, Date birthday, String avatarId, String description) {
-		super();
-		this.idx = idx;
-		this.address = address;
-		this.birthday = birthday;
-		this.avatarId = avatarId;
-		this.description = description;
-	}
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "avatarId") // 이 user_detail 의 avatar_id 값을 이용해서
+	Avatar avatar;
 
 	public Integer getIdx() {
 		return idx;
@@ -57,12 +50,12 @@ public class UserDetail {
 		this.birthday = birthday;
 	}
 
-	public String getAvatarId() {
-		return avatarId;
+	public Avatar getAvatar() {
+		return avatar;
 	}
 
-	public void setAvatarId(String avatarId) {
-		this.avatarId = avatarId;
+	public void setAvatar(Avatar avatar) {
+		this.avatar = avatar;
 	}
 
 	public String getDescription() {
@@ -75,7 +68,7 @@ public class UserDetail {
 
 	@Override
 	public String toString() {
-		return "UserDetail [idx=" + idx + ", address=" + address + ", birthday=" + birthday + ", avatarId=" + avatarId
+		return "UserDetail [idx=" + idx + ", address=" + address + ", birthday=" + birthday + ", avatar=" + avatar
 				+ ", description=" + description + "]";
 	}
 

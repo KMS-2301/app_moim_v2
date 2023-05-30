@@ -10,6 +10,8 @@ public class UserResponseData {
 	String nick;
 	String joinDay;
 	String joinTime;
+	String avatarUrl;
+	String description;
 
 	public UserResponseData(User user) {
 		this.id = user.getId();
@@ -18,6 +20,48 @@ public class UserResponseData {
 		long diff = System.currentTimeMillis() - user.getJoinDate().getTime();
 		this.joinTime = diff / (1000L * 60 * 60 * 24) + "일 전";
 		this.nick = user.getNick();
+		if (user.getUserDetail() != null) {
+			description = user.getUserDetail().getDescription();
+			if (user.getUserDetail().getAvatar() != null) {
+				avatarUrl = user.getUserDetail().getAvatar().getUrl();
+			}
+		}
+	}
+
+	public String getAvatarUrl() {
+		return avatarUrl;
+	}
+
+	public void setAvatarUrl(String avatarUrl) {
+		this.avatarUrl = avatarUrl;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public String getNick() {
+		return nick;
+	}
+
+	public String getJoinDay() {
+		return joinDay;
+	}
+
+	public String getJoinTime() {
+		return joinTime;
 	}
 
 	public void setId(String id) {

@@ -3,9 +3,12 @@ package org.edupoll.model.entity;
 import java.util.Date;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,8 +17,6 @@ public class Moim {
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	String id;
-	
-	String managerId;
 	String title;
 	String cate;
 	String description;
@@ -24,20 +25,16 @@ public class Moim {
 	Date targetDate;
 	Integer duration;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "managerId")
+	User manager;
+
 	public String getId() {
 		return id;
 	}
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getManagerId() {
-		return managerId;
-	}
-
-	public void setManagerId(String managerId) {
-		this.managerId = managerId;
 	}
 
 	public String getTitle() {
@@ -94,6 +91,14 @@ public class Moim {
 
 	public void setDuration(Integer duration) {
 		this.duration = duration;
+	}
+
+	public User getManager() {
+		return manager;
+	}
+
+	public void setManager(User manager) {
+		this.manager = manager;
 	}
 
 }

@@ -3,7 +3,10 @@ package org.edupoll.model.entity;
 import java.util.Date;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
@@ -11,26 +14,17 @@ import jakarta.persistence.Table;
 @Table(name = "users")
 public class User {
 	@Id
-	String id;
+	String id;  
 
 	String pass;
 	String nick;
 	Date joinDate;
-	Integer userDetailIdx;
 
-	public User() {
-		super();
-	}
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "userDetailIdx") // User Entity 의 필드
+	UserDetail userDetail; // 이 컬럼을 찾는 객체는 UserDetail (id를 기준으로 찾음)
 
-	public User(String id, String pass, String nick, Date joinDate, Integer userDetailIdx) {
-		super();
-		this.id = id;
-		this.pass = pass;
-		this.nick = nick;
-		this.joinDate = joinDate;
-		this.userDetailIdx = userDetailIdx;
-	}
-
+	// setter / getter 만 추가
 	public String getId() {
 		return id;
 	}
@@ -63,20 +57,27 @@ public class User {
 		this.joinDate = joinDate;
 	}
 
-	public Integer getUserDetailIdx() {
-		return userDetailIdx;
+	public UserDetail getUserDetail() {
+		return userDetail;
 	}
 
-	public void setUserDetailIdx(Integer userDetailIdx) {
-		this.userDetailIdx = userDetailIdx;
+	public void setUserDetail(UserDetail userDetail) {
+		this.userDetail = userDetail;
 	}
 
+	// 객체 insert 전 할 작업
 	@PrePersist
 	public void doPrePersist() {
 		System.out.println("doPrePersist..");
 		joinDate = new Date();
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", pass=" + pass + ", nick=" + nick + ", joinDate=" + joinDate + ", userDetail="
+				+ userDetail + "]";
+	}
+	// toString
 }
 
 /*
