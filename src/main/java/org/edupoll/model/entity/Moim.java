@@ -1,6 +1,7 @@
 package org.edupoll.model.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -9,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -28,6 +30,22 @@ public class Moim {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "managerId")
 	User manager;
+	
+	
+	@OneToMany(mappedBy = "moim", fetch = FetchType.LAZY)
+	List<Attendance> attendances;
+	
+	// 어노테이션으로 관계 설정
+	@OneToMany(mappedBy = "moim", fetch = FetchType.LAZY)
+	List<Reply> replys;
+
+	public List<Reply> getReplys() {
+		return replys;
+	}
+
+	public void setReplys(List<Reply> replys) {
+		this.replys = replys;
+	}
 
 	public String getId() {
 		return id;

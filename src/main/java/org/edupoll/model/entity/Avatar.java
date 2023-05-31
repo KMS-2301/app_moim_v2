@@ -1,7 +1,11 @@
 package org.edupoll.model.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,6 +17,17 @@ public class Avatar {
 	String id;
 	String description;
 	String url;
+
+	@OneToMany(mappedBy = "avatar", fetch = FetchType.LAZY)
+	List<UserDetail> details;
+
+	public List<UserDetail> getDetails() {
+		return details;
+	}
+
+	public void setDetails(List<UserDetail> details) {
+		this.details = details;
+	}
 
 	public String getId() {
 		return id;

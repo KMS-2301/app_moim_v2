@@ -1,9 +1,10 @@
 package org.edupoll.model.dto;
 
 public class AddReplyRequestData {
-	String moimId;
-	String password;
 	String text;
+	String password;
+	String moimId;
+	
 
 	public String getMoimId() {
 		return moimId;

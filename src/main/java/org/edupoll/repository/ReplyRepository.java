@@ -8,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ReplyRepository extends JpaRepository<Reply, Integer>{
-
 	List<Reply> findByMoimId(String moimId, Pageable pageable);
 	List<Reply> findByMoim(Moim moim, Pageable pageable);
 }

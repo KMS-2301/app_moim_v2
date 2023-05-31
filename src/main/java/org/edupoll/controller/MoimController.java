@@ -43,13 +43,16 @@ public class MoimController {
 	}
 	
 	
+	// 특정 모임 정보 보기용 EndPoint + (리플정보도 같이)
 	@GetMapping("/moims/view")
 	public String showMoimDetail(String id, @RequestParam(defaultValue="1") int p,  Model model) {
 		model.addAttribute("moim", moimService.getSpecificMoimById(id));
-		model.addAttribute("replys", replyService.getReplysByMoimId(id, p));
+		// model.addAttribute("replys", replyService.getReplysByMoimId(id, p));
 		return "moims/view";
 	}
 	
+	
+	// 모임 등록 처리용 EndPoint
 	@PostMapping("/moims/reply")
 	public String replyAddHandle(AddReplyRequestData data) {
 		replyService.createNewReplay(data);

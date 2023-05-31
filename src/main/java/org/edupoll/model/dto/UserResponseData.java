@@ -29,7 +29,7 @@ public class UserResponseData {
 	}
 
 	public String getAvatarUrl() {
-		return avatarUrl;
+		return avatarUrl==null ? "" : avatarUrl;
 	}
 
 	public void setAvatarUrl(String avatarUrl) {

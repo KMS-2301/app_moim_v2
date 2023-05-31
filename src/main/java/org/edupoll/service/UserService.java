@@ -86,7 +86,10 @@ public class UserService {
 		return userDetailRepository.findById(userDetail.getIdx()).orElse(null);
 		*/
 	}
-
+	
+	public User findSpecificUserById(String targetId) {
+		return  userRepository.findById(targetId).orElse(null);
+	}
 }
 
 

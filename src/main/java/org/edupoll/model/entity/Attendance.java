@@ -10,21 +10,20 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "replys")
-public class Reply {
-	// 필드 설정 // 어노테이션 설정
+@Table(name = "attendances")
+public class Attendance {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	Integer id;
 
-	String text;
-	String password;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "userId")
+	User user;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "moimId")
-	Moim moim;
+	Moim moim; 
 
-	// 기타 setter, getter
 	public Integer getId() {
 		return id;
 	}
@@ -33,20 +32,12 @@ public class Reply {
 		this.id = id;
 	}
 
-	public String getText() {
-		return text;
+	public User getUser() {
+		return user;
 	}
 
-	public void setText(String text) {
-		this.text = text;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Moim getMoim() {
@@ -54,6 +45,16 @@ public class Reply {
 	}
 
 	public void setMoim(Moim moim) {
+		this.moim = moim;
+	}
+
+	public Attendance() {
+		super();
+	}
+
+	public Attendance(User user, Moim moim) {
+		super();
+		this.user = user;
 		this.moim = moim;
 	}
 
