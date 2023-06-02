@@ -9,6 +9,8 @@ import org.edupoll.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class FollowService {
 	@Autowired
@@ -17,6 +19,7 @@ public class FollowService {
 	UserRepository userRepository;
 
 	// 누군가 누구를 팔로우하고자 할때 그걸 처리할 서비스 메서드
+	@Transactional
 	public FollowResponseData createFollow(String ownerId, String targetId) {
 		if (followRepository.existsByOwnerIdIsAndTargetIdIs(ownerId, targetId)) {
 			// 실패를 알리는 DTO 리턴 ... .. 바로 ResponseBody 로 나갈꺼니 객체로 리턴하는게 좋을 듯
@@ -32,6 +35,7 @@ public class FollowService {
 	}
 
 	// 누군가 누구를 언팔로우 하고자 할때 그걸 처리할 서비스 메서드
+	@Transactional
 	public FollowResponseData deleteFollow(String ownerId, String targetId) {
 		followRepository.deleteByOwnerIdIsAndTargetIdIs(ownerId, targetId);
 		return new FollowResponseData(true);

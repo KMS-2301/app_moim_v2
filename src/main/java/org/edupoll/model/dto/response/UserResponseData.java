@@ -12,6 +12,7 @@ public class UserResponseData {
 	String joinTime;
 	String avatarUrl;
 	String description;
+	boolean followed;	// thio 유저를 검색한 유저가 follow 중인지 확인
 
 	public UserResponseData(User user) {
 		this.id = user.getId();
@@ -30,6 +31,14 @@ public class UserResponseData {
 
 	public String getAvatarUrl() {
 		return avatarUrl;
+	}
+
+	public boolean isFollowed() {
+		return followed;
+	}
+
+	public void setFollowed(boolean followed) {
+		this.followed = followed;
 	}
 
 	public void setAvatarUrl(String avatarUrl) {

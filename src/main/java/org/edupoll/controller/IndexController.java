@@ -8,6 +8,7 @@ public class IndexController {
 
 	@GetMapping("/")
 	public String indexHandle() {
-		return "index";
+		// return "index";
+		return "search/form";
 	}
 }
