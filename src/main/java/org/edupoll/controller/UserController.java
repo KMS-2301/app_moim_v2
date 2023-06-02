@@ -1,6 +1,6 @@
 package org.edupoll.controller;
 
-import org.edupoll.model.dto.LoginRequestData;
+import org.edupoll.model.dto.request.LoginRequestData;
 import org.edupoll.model.entity.User;
 import org.edupoll.service.UserService;
 import org.slf4j.Logger;

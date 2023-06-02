@@ -16,15 +16,20 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class PrivateController {
 	Logger logger = LoggerFactory.getLogger(getClass());
-
 	@Autowired
 	UserService userService;
 
+	@GetMapping("/private")
+	public String showPrivateInfoView(@SessionAttribute String logonId, Model model) {
+		model.addAttribute("user", userService.findSpecificUserById(logonId));
+		return "private/default";
+	}
+	
 	@GetMapping("/private/delete")
 	public String deleteUesrHandle(@SessionAttribute String logonId, HttpSession session) {
 		boolean rst = userService.deleteSpecificUser(logonId);
 		session.invalidate();
-		
+
 		return "private/goodbye";
 	}
 

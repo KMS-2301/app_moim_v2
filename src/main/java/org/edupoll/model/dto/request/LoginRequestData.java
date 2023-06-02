@@ -1,4 +1,4 @@
-package org.edupoll.model.dto;	// Data Transfer Object
+package org.edupoll.model.dto.request;	// Data Transfer Object
 
 public class LoginRequestData {
 	String loginId;

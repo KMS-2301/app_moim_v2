@@ -23,17 +23,33 @@
 				</div>
 			</div>
 			<div class="card-footer text-end">
-				<span>모임날짜:{{targetDate}}</span>
+				<span>모임주최자:{{manager.nick}}</span>
 			</div>
 		</div>
 	</div>
 	{{/moims }}
 </div>
 <ul class="pagination pagination-sm justify-content-end mt-3">
-	<li class="page-item disabled"><a class="page-link">Previous</a></li>
-	<li class="page-item"><a class="page-link" href="#">1</a></li>
-	<li class="page-item"><a class="page-link" href="#">2</a></li>
-	<li class="page-item"><a class="page-link" href="#">3</a></li>
-	<li class="page-item"><a class="page-link" href="#">Next</a></li>
+	{{#pagination.prev.active }}
+		<li class="page-item">
+			<a class="page-link" href="/moims?p={{pagination.prev.value}}">Preivous</a></li>
+	{{/pagination.prev.active }}
+
+	{{#pagination.pages }}
+		{{#active }}
+			<li class="page-item active">
+				<a class="page-link" href="/moims?p={{value}}">{{value}}</a></li>
+		{{/active }}
+		{{^active }}
+			<li class="page-item">
+				<a class="page-link" href="/moims?p={{value}}">{{value}}</a></li>
+		{{/active }}
+	{{/pagination.pages }}
+	
+	{{#pagination.next.active }}
+		<li class="page-item">
+			<a class="page-link" href="/moims?p={{pagination.next.value}}">Next</a></li>
+	{{/pagination.next.active }}
+	
 </ul>
 {{ > /common/footer }}
