@@ -3,7 +3,7 @@ package org.edupoll.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.edupoll.model.dto.UserResponseData;
+import org.edupoll.model.dto.response.UserResponseData;
 import org.edupoll.model.entity.User;
 import org.edupoll.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

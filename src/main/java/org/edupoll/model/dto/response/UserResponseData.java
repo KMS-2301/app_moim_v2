@@ -1,4 +1,4 @@
-package org.edupoll.model.dto;
+package org.edupoll.model.dto.response;
 
 import java.text.SimpleDateFormat;
 
@@ -29,7 +29,7 @@ public class UserResponseData {
 	}
 
 	public String getAvatarUrl() {
-		return avatarUrl==null ? "" : avatarUrl;
+		return avatarUrl;
 	}
 
 	public void setAvatarUrl(String avatarUrl) {

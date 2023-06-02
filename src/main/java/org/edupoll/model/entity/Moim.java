@@ -9,6 +9,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -30,11 +32,32 @@ public class Moim {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "managerId")
 	User manager;
-	
-	
+
 	@OneToMany(mappedBy = "moim", fetch = FetchType.LAZY)
 	List<Attendance> attendances;
+
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="attendances",
+		joinColumns = @JoinColumn(name="moimId"), 
+		inverseJoinColumns = @JoinColumn(name="userId"))
+	List<User> attendUsers;
 	
+	public List<User> getAttendUsers() {
+		return attendUsers;
+	}
+
+	public void setAttendUsers(List<User> attendUsers) {
+		this.attendUsers = attendUsers;
+	}
+
+	public List<Attendance> getAttendances() {
+		return attendances;
+	}
+
+	public void setAttendances(List<Attendance> attendances) {
+		this.attendances = attendances;
+	}
+
 	// 어노테이션으로 관계 설정
 	@OneToMany(mappedBy = "moim", fetch = FetchType.LAZY)
 	List<Reply> replys;

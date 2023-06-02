@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
@@ -28,6 +30,42 @@ public class User {
 
 	@OneToMany(mappedBy = "manager", fetch = FetchType.LAZY)
 	List<Moim> moims;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "attendances", joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "moimId"))
+	List<Moim> attendMoims;
+
+	
+	@OneToMany(mappedBy = "owner")
+	List<Follow> followTo;
+	
+	@OneToMany(mappedBy = "target")
+	List<Follow> followFrom;
+	
+	
+	public List<Follow> getFollowTo() {
+		return followTo;
+	}
+
+	public void setFollowTo(List<Follow> followTo) {
+		this.followTo = followTo;
+	}
+
+	public List<Follow> getFollowFrom() {
+		return followFrom;
+	}
+
+	public void setFollowFrom(List<Follow> followFrom) {
+		this.followFrom = followFrom;
+	}
+
+	public List<Moim> getAttendMoims() {
+		return attendMoims;
+	}
+
+	public void setAttendMoims(List<Moim> attendMoims) {
+		this.attendMoims = attendMoims;
+	}
 
 	public List<Moim> getMoims() {
 		return moims;
